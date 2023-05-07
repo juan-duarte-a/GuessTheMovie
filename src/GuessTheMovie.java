@@ -118,7 +118,10 @@ public class GuessTheMovie {
                 }
             }
 
-            System.out.print("Has intentado " + (10 - points) + " letras equivocadas: ");
+            if (10 - points == 1)
+                System.out.print("Has intentado " + (10 - points) + " letra equivocada: ");
+            else
+                System.out.print("Has intentado " + (10 - points) + " letras equivocadas: ");
 
             if (points < 10) {
                 for (int i = 0; i < 10 - points; i++) {
@@ -128,7 +131,6 @@ public class GuessTheMovie {
                             System.out.print(", ");
                     }
                 }
-
             }
 
             System.out.println();
