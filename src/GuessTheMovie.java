@@ -12,7 +12,7 @@ public class GuessTheMovie {
         movie = getRandomMovieName(movieNames);
 
         if (game(movie)) {
-            System.out.printf("¡Has adivinado '%s' correctamente!\n", movie);
+            System.out.printf("¡Has adivinado '%s' correctamente!%n", movie);
         } else {
             System.out.println("Game over!");
         }
@@ -86,7 +86,7 @@ public class GuessTheMovie {
         updateGuess(movieName, " ", movieNameGuess);
 
         while (points > 0) {
-            System.out.println("\nAdivina la letra o la película: ");
+            System.out.printf("%nAdivina la letra o la película:%n");
 
             do {
                 System.out.print("-> ");
