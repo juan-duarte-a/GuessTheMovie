@@ -1,5 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import com.sun.tools.javac.Main;
+
+import java.io.*;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -19,45 +20,27 @@ public class GuessTheMovie {
     }
 
     public static String[] loadMovieNames() {
-        File file = new File("peliculas.txt");
         String[] movies;
         String movie;
 
-        int count = 0;
-        int countMovies = 0;
-
-        Scanner sc = null;
-        try {
-            sc = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        }
-
-        assert sc != null;
-        while (sc.hasNextLine()) {
-            count++;
-            movie = sc.nextLine();
-
-            if (!movie.trim().isEmpty())
-                countMovies++;
-        }
-
-        try {
-            sc = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        }
+        int countMovies = 50;
 
         movies = new String[countMovies];
         countMovies = 0;
 
-        for (int i = 0; i < count; i++) {
-            movie = sc.nextLine().trim();
+        InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("resources/peliculas.txt");
 
-            if (!movie.isEmpty()) {
-                movies[countMovies] = movie.toLowerCase();
-                countMovies++;
+        if (inputStream != null) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                while ((movie = reader.readLine()) != null) {
+                    movies[countMovies] = movie.toLowerCase();
+                    countMovies++;
+                }
+            } catch (IOException e) {
+                System.out.println(e);
             }
+        } else {
+            System.err.println("File not found!");
         }
 
         return movies;
