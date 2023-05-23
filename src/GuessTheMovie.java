@@ -146,7 +146,7 @@ public class GuessTheMovie {
         if (guess.length() > 1) {
             if (Arrays.equals(guess.toCharArray(), movieName)) {
                 System.arraycopy(movieName, 0, movieGuess, 0, movieName.length);
-                System.out.println("¡Muy bien!");
+                System.out.printf("%n¡Muy bien!%n");
                 correct = true;
             }
         } else {
@@ -160,7 +160,7 @@ public class GuessTheMovie {
         }
 
         if (!Arrays.equals(movieName, movieGuess) && guess.length() == 1) {
-            System.out.print("\nEstás adivinando: ");
+            System.out.printf("%nEstás adivinando: ");
 
             for (char c: movieGuess)
                 if (c != Character.MIN_VALUE)
