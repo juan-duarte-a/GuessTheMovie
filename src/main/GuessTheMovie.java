@@ -1,5 +1,3 @@
-import com.sun.tools.javac.Main;
-
 import java.io.*;
 import java.util.Arrays;
 import java.util.Random;
@@ -15,7 +13,7 @@ public class GuessTheMovie {
         if (game(movie)) {
             System.out.printf("¡Has adivinado '%s' correctamente!%n", movie);
         } else {
-            System.out.println("Game over!");
+            System.out.printf("%nGame over!");
         }
     }
 
@@ -28,7 +26,7 @@ public class GuessTheMovie {
         movies = new String[countMovies];
         countMovies = 0;
 
-        InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("resources/peliculas.txt");
+        InputStream inputStream = GuessTheMovie.class.getResourceAsStream("peliculas.txt");
 
         if (inputStream != null) {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
