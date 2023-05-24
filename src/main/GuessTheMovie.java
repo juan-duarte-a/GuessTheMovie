@@ -8,37 +8,49 @@ public class GuessTheMovie {
         String movie;
         String[] movieNames = loadMovieNames();
 
-        movie = getRandomMovieName(movieNames);
+        if (movieNames != null) {
+            movie = getRandomMovieName(movieNames);
 
-        if (game(movie)) {
-            System.out.printf("¡Has adivinado '%s' correctamente!%n", movie);
-        } else {
-            System.out.printf("%nGame over!%n");
+            if (game(movie)) {
+                System.out.printf("¡Has adivinado '%s' correctamente!%n", movie);
+            } else {
+                System.out.printf("%nGame over!%n");
+            }
         }
     }
 
     public static String[] loadMovieNames() {
-        String[] movies;
+        BufferedReader reader;
+        String[] movies = null;
         String movie;
 
-        int countMovies = 50;
-
-        movies = new String[countMovies];
-        countMovies = 0;
+        int countMovies = 0;
 
         InputStream inputStream = GuessTheMovie.class.getResourceAsStream("peliculas.txt");
 
-        if (inputStream != null) {
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+        try {
+            if (inputStream != null) {
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+                while (reader.readLine() != null) {
+                    countMovies++;
+                }
+
+                movies = new String[countMovies];
+                inputStream = GuessTheMovie.class.getResourceAsStream("peliculas.txt");
+
+                assert inputStream != null;
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                countMovies = 0;
                 while ((movie = reader.readLine()) != null) {
                     movies[countMovies] = movie.toLowerCase();
                     countMovies++;
                 }
-            } catch (IOException e) {
-                System.out.println(e);
+            } else {
+                System.err.println("'peliculas.txt' not found!");
             }
-        } else {
-            System.err.println("File not found!");
+        } catch (IOException e) {
+            System.out.println(e);
         }
 
         return movies;
