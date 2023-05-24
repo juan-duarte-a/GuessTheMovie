@@ -13,7 +13,7 @@ public class GuessTheMovie {
         if (game(movie)) {
             System.out.printf("¡Has adivinado '%s' correctamente!%n", movie);
         } else {
-            System.out.printf("%nGame over!");
+            System.out.printf("%nGame over!%n");
         }
     }
 
