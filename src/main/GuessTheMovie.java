@@ -153,6 +153,7 @@ public class GuessTheMovie {
         }
 
         if (!Arrays.equals(movieName, movieGuess) && guess.length() == 1) {
+            System.out.println("\033[H\033[2J");
             System.out.printf("%nEstás adivinando: ");
 
             for (char c: movieGuess)
